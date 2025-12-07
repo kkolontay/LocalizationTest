@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Hello world"; ObjectID = "5hl-tv-GGo"; */
+"5hl-tv-GGo.text" = "Hello world";
+
+/* Class = "UILabel"; text = "Switch language"; ObjectID = "ZtN-df-oph"; */
+"ZtN-df-oph.text" = "Switch language";
+
+/* Class = "UILabel"; text = "Some label with content"; ObjectID = "acw-rj-eOb"; */
+"acw-rj-eOb.text" = "Some label with content";
+
+/* Class = "UIButton"; configuration.title = "Push me"; ObjectID = "jnO-LQ-yWT"; */
+"jnO-LQ-yWT.configuration.title" = "Push me";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jnO-LQ-yWT"; */
+"jnO-LQ-yWT.normalTitle" = "Button";

@@ -47,9 +47,17 @@ class LocalizationManager {
       bundle = Bundle.main
     }
   }
-
+  
   func localizedString(for key: String, value: String? = nil) -> String {
-    return bundle.localizedString(forKey: key, value: value, table: nil)
+    // Try to get from Main.strings first
+    let localizedValue = bundle.localizedString(forKey: key, value: nil, table: "Main")
+
+    // If not found, use default value
+    if localizedValue == key, let defaultValue = value {
+      return defaultValue
+    }
+
+    return localizedValue
   }
 
   func localizedString(for key: String, tableName: String? = nil, value: String? = nil, comment: String = "") -> String {
