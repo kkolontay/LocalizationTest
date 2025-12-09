@@ -14,19 +14,36 @@ class SwitchViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    languageSwitch.isOn = LocalizationManager.shared.currentLanguage == "en"
-    languageLabel.text = LocalizationManager.shared.currentLanguage
+    let currentLanguage = UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
+       print("DEBUG viewDidLoad: AppLanguage = \(currentLanguage)")
+       print("DEBUG viewDidLoad: AppleLanguages = \(UserDefaults.standard.array(forKey: "AppleLanguages") ?? [])")
+       print("DEBUG viewDidLoad: preferredLocalizations = \(Bundle.main.preferredLocalizations)")
+
+       languageSwitch?.isOn = (currentLanguage == "fr-CA")
   }
 
   @IBAction func switchWasSwitch(_ sender: UISwitch) {
     currentStatusOfSwiftche = sender.isOn
-    if sender.isOn {
-      LocalizationManager.shared.currentLanguage = "en"
-      print("TEST: \("ZtN-df-oph.text".localized)")
-    } else {
-      LocalizationManager.shared.currentLanguage = "fr-CA"
-      print("TEST: \("ZtN-df-oph.text".localized)")
-    }
+    let newLanguage = sender.isOn ? "fr-CA" : "en"
+
+       print("DEBUG: Switching to \(newLanguage)")
+
+       UserDefaults.standard.set(newLanguage, forKey: "AppLanguage")
+       UserDefaults.standard.synchronize()
+
+       // Verify it was saved
+       print("DEBUG: Saved AppLanguage = \(UserDefaults.standard.string(forKey: "AppLanguage") ?? "nil")")
+
+       let alert = UIAlertController(
+         title: "Restart Required",
+         message: "Language set to: \(newLanguage)\nPlease restart the app.",
+         preferredStyle: .alert
+       )
+       alert.addAction(UIAlertAction(title: "Restart Now", style: .default) { _ in
+         exit(0)
+       })
+       alert.addAction(UIAlertAction(title: "Later", style: .cancel))
+       present(alert, animated: true)
+  }
   }
 
-}
